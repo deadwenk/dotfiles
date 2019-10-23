@@ -42,7 +42,7 @@ for file in $(ls $HOME/.aliases); do
 done
 
 # console color theme
-#source $HOME/.config/bash/base16-shell/scripts/base16-default-dark.sh
+source $HOME/.config/base16-shell/scripts/base16-default-dark.sh
 
 # bash colors foreground text
 c_ft_red='\[\033[0;31m\]'
