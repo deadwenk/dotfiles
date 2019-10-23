@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# auxiliary
+alias ls="ls -lHG"
+alias ll="ls -laHG"
+alias ..="builtin cd .."
+alias ...="builtin cd ../.."
+alias ....="builtin cd ../../.."
+
+function cd()
+{
+  if [ "$@" == ".." ]; then
+    echo use without 'cd'
+    return
+  fi
+  if [ "$@" == "../.." ]; then
+    echo use without 'cd'
+    return
+  fi
+  if [ "$@" == "../../.." ]; then
+    echo use without 'cd'
+    return
+  fi
+  builtin cd "$@"
+}
+
+# searching
+alias ff='find . -type f -name'
+alias fd='find . -type d -name'
+alias ft='grep -r'
+
+# cd to git project root directory
+function cdpr() {
+	local dir=$(git rev-parse --show-toplevel 2>&1 | awk '{print $1}')
+	if [[ "$dir" != "fatal:" ]]; then
+    cd $dir
+    if [ ! -z $1 ]; then
+      cd $1
+    fi
+  fi
+}

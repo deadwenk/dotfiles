@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# git aliases
+alias ga="git add"
+alias grm="git rm"
+alias gcl="git clean"
+alias gclf="git clean -f"
+alias gclfd="git clean -fd"
+alias gcom="git commit"
+alias gcoma="git commit --amend"
+alias glog="git log"
+alias gsh="git show"
+alias gst="git status"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gpr="git pull -r"
+alias gp="git pull"
+alias gr="git rebase"
+alias gri="git rebase -i"
+alias gsth="git stash"
+alias gsl="git stash list"
+alias gsa="git stash apply"
+alias gsp="git stash pop"
+alias gsph="git stash push"
+alias gsd="git stash drop"
+alias gss="git stash show -p"
+alias gr="git reset"
+alias grs="git reset --soft"
+alias grs1="git reset --soft HEAD~1"
+alias grh="git reset --hard"
+alias grh1="git reset --hard HEAD~1"
+alias gsur="git submodule update --recursive"
+
+# git return from branch to master and remove them
+function gcmrb() {
+	branch_name=$(branch)
+	[ ! -z $branch_name ] && [ ! $branch_name = master ] || return
+	gc master && gbd $branch_name || echo force remove; gb -D $branch_name
+}
+
+alias gals="cat $HOME/.bash_git_aliases"
