@@ -1,5 +1,7 @@
 #!/usr/bin/env lua5.3
 
+-- WIP
+
 local time = io.open(os.getenv('HOME') .. '/common/time.txt')
 assert(time, 'cannot open "~/common/time.txt" file')
 

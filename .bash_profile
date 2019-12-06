@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 
 # path
-#export PATH=$PATH:$HOME/.bin:$HOME/.homebrew/bin:$HOME/Library/Android/sdk/platform-tools
-export PATH=$PATH:/home/.bin
+PLATFORM_PATH=$PWD/.bin
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PLATFORM_PATH=$PLATFORM_PATH:$HOME/.homebrew/bin:$HOME/Library/Android/sdk/platform-tools
+elif [[ "$OSTYPE" == "msys" ]]; then
+  PLATFORM_PATH=$ORIGINAL_PATH:/c/Users/$USER/AppData/Roaming/npm:/c/Program\ Files/nodejs
+#  PLATFORM_PATH=
+#elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+#  PLATFORM_PATH=
+fi
+export PATH=$PATH:$PLATFORM_PATH
 
 # locale set
 #export LC_ALL=en_US.UTF-8
@@ -37,12 +45,12 @@ function shortwd() {
 }
 
 # aliases
-for file in $(ls $HOME/.aliases); do
-  source $HOME/.aliases/$file
+for file in $(ls $PWD/.aliases); do
+	source $PWD/.aliases/$file
 done
 
 # console color theme
-source $HOME/.config/base16-shell/scripts/base16-default-dark.sh
+source $PWD/.config/base16-shell/scripts/base16-default-dark.sh
 
 # bash colors foreground text
 c_ft_red='\[\033[0;31m\]'
@@ -60,9 +68,10 @@ c_ft_lightyellow='\[\033[0;93m\]'
 c_ft_lightblue='\[\033[0;94m\]'
 c_ft_lightmagenta='\[\033[0;95m\]'
 c_ft_lightcyan='\[\033[0;96m\]'
+
 c_ft_white='\[\033[0;97m\]'
 c_ft_default='\[\033[0;39m\]'
 
 c_end='\[\033[m\]'
 
-PS1="${c_ft_darkgray}[${c_end} ${c_ft_cyan}\$(shortwd)${c_end} ${c_ft_magenta}\u${c_end} ${c_ft_green}\$(branch)${c_end}${c_ft_darkgray}]${c_end}\n ${c_ft_darkgray}→${c_end} ${c_ft_red}$ ${c_end}"
+PS1="${c_ft_darkgray}[${c_end} ${c_ft_cyan}\$(shortwd)${c_end} ${c_ft_magenta}\u${c_end} ${c_ft_green}\$(branch)${c_end}${c_ft_darkgray}]${c_end}"$'\n'"${c_ft_red}; ${c_end}"

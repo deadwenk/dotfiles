@@ -39,3 +39,27 @@ function cdpr() {
     fi
   fi
 }
+
+# msys2 sudo hack
+if [[ "$MSYSTEM" != "" ]]; then
+  function escape()
+  {
+      RESULT="$1"
+      RESULT="${RESULT/\'/\\\'\'}" # replace ' with \''
+      RESULT="${RESULT/\"/\\\\\\\"}" # replace " with \\\"
+      echo "''$RESULT''" # PowerShell uses '' to escape '
+  }
+
+  function sudo()
+  {
+      ESCAPED=()
+      for ARG in "$@"
+      do
+          ESCAPED+=($(escape "$ARG"))
+      done
+
+      SHELL_PATH=$(cygpath -w $SHELL)
+      PS_COMMAND="[Console]::In.ReadToEnd() | Start-Process '$SHELL_PATH' '-c -- \"${ESCAPED[*]}\"' -Verb RunAs"
+      powershell -NoProfile -ExecutionPolicy Bypass "$PS_COMMAND"
+  }
+fi

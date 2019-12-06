@@ -39,5 +39,3 @@ function gcmrb() {
 	[ ! -z $branch_name ] && [ ! $branch_name = master ] || return
 	gc master && gbd $branch_name || echo force remove; gb -D $branch_name
 }
-
-alias gals="cat $HOME/.bash_git_aliases"
