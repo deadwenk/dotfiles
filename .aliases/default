@@ -2,26 +2,26 @@
 
 # auxiliary
 alias ls="ls -lHG"
-alias ll="ls -laHG"
+alias l="ls -laHG"
 alias ..="builtin cd .."
 alias ...="builtin cd ../.."
 alias ....="builtin cd ../../.."
 
 function cd()
 {
-  if [ "$@" == ".." ]; then
-    echo use without 'cd'
-    return
-  fi
-  if [ "$@" == "../.." ]; then
-    echo use without 'cd'
-    return
-  fi
-  if [ "$@" == "../../.." ]; then
-    echo use without 'cd'
-    return
-  fi
-  builtin cd "$@"
+	if [ -z "${1#\.\.}" ]; then
+		echo use without \'cd\'
+		return
+	fi
+	if [ -z "${1#\.\./\.\.}" ]; then
+		echo use without \'cd\'
+		return
+	fi
+	if [ -z "${1#\.\./\.\./\.\.}" ]; then
+		echo use without \'cd\'
+		return
+	fi
+	builtin cd $@
 }
 
 # searching
@@ -31,35 +31,37 @@ alias ft='grep -r'
 
 # cd to git project root directory
 function cdpr() {
-	local dir=$(git rev-parse --show-toplevel 2>&1 | awk '{print $1}')
-	if [[ "$dir" != "fatal:" ]]; then
-    cd $dir
-    if [ ! -z $1 ]; then
-      cd $1
-    fi
-  fi
+	local dir=$(git rev-parse --show-toplevel 2>&1)
+	if [[ "$(echo $dir | awk '{print $1}')" != "fatal:" ]]; then
+		cd $dir
+		if [ ! -z "$@" ]; then
+			cd $@
+		fi
+	else
+		echo $dir
+	fi
 }
 
 # msys2 sudo hack
 if [[ "$MSYSTEM" != "" ]]; then
-  function escape()
-  {
-      RESULT="$1"
-      RESULT="${RESULT/\'/\\\'\'}" # replace ' with \''
-      RESULT="${RESULT/\"/\\\\\\\"}" # replace " with \\\"
-      echo "''$RESULT''" # PowerShell uses '' to escape '
-  }
+	function escape()
+	{
+		RESULT="$1"
+		RESULT="${RESULT/\'/\\\'\'}" # replace ' with \''
+		RESULT="${RESULT/\"/\\\\\\\"}" # replace " with \\\"
+		echo "''$RESULT''" # PowerShell uses '' to escape '
+	}
 
-  function sudo()
-  {
-      ESCAPED=()
-      for ARG in "$@"
-      do
-          ESCAPED+=($(escape "$ARG"))
-      done
+	function sudo()
+	{
+		ESCAPED=()
+		for ARG in "$@"
+		do
+			ESCAPED+=($(escape "$ARG"))
+		done
 
-      SHELL_PATH=$(cygpath -w $SHELL)
-      PS_COMMAND="[Console]::In.ReadToEnd() | Start-Process '$SHELL_PATH' '-c -- \"${ESCAPED[*]}\"' -Verb RunAs"
-      powershell -NoProfile -ExecutionPolicy Bypass "$PS_COMMAND"
-  }
+		SHELL_PATH=$(cygpath -w $SHELL)
+		PS_COMMAND="[Console]::In.ReadToEnd() | Start-Process '$SHELL_PATH' '-c -- \"${ESCAPED[*]}\"' -Verb RunAs"
+		powershell -NoProfile -ExecutionPolicy Bypass "$PS_COMMAND"
+	}
 fi

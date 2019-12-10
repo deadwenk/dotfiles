@@ -1,0 +1,33 @@
+{
+    "window.zoomLevel": 0,
+
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+
+    "workbench.editor.showTabs": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.tabCloseButton": "right",
+    "workbench.editor.focusRecentEditorAfterClose": true,
+
+    "editor.rulers": [
+        120
+    ],
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wrappingIndent": "indent",
+    // "editor.autoClosingBrackets": "never",
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Iosevka Term SS08', Menlo, Monaco, 'Courier New', monospace",
+    "editor.mouseWheelZoom": false,
+    "editor.fontSize": 15,
+    "editor.suggestSelection": "first",
+    "editor.autoIndent": false,
+    "editor.insertSpaces": false,
+
+    "debug.toolBarLocation": "docked",
+    "terminal.integrated.rendererType": "dom",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "update.mode": "none",
+    "git.autoRepositoryDetection": false
+}
