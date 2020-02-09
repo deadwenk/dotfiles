@@ -31,7 +31,7 @@ export PATH=$PATH:$PLATFORM_PATH
 
 # bash prompt
 function branch() {
-  git branch 2>/dev/null | grep '^*' | colrm 1 2 | awk '{print $0" "}'
+	git branch 2>/dev/null | grep '^*' | colrm 1 2 | awk '{print $0" "}'
 }
 
 function shortwd() {
