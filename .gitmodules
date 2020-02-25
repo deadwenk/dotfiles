@@ -1,6 +1,9 @@
 [submodule ".config/base16-shell"]
 	path = .config/base16-shell
 	url = https://github.com/chriskempson/base16-shell
+[submodule ".config/base16-konsole"]
+	path = .config/base16-konsole
+	url = https://github.com/cskeeters/base16-konsole
 [submodule ".vim/plugged/syntastic"]
 	path = .vim/plugged/syntastic
 	url = https://github.com/vim-syntastic/syntastic
@@ -22,3 +25,6 @@
 [submodule ".vim/plugged/vim-mucomplete"]
 	path = .vim/plugged/vim-mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
