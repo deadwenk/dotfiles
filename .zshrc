@@ -97,3 +97,17 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# export dotfiles version
+export DOT_VERSION=$(cat $HOME/.dot_version)
+
+# platform specific path
+PLATFORM_PATH=$HOME/.bin
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	PLATFORM_PATH=$PLATFORM_PATH:$HOME/.homebrew/bin:$HOME/Library/Android/sdk/platform-tools
+elif [[ "$OSTYPE" == "msys" ]]; then
+	PLATFORM_PATH=$ORIGINAL_PATH
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+	PLATFORM_PATH=$HOME/.bin/linux
+fi
+export PATH=$PATH:$PLATFORM_PATH

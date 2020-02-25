@@ -1,0 +1,19 @@
+#!/bin/sh
+
+COPYING_DIRS='.bin .vim'
+COPYING_FILES='.dot_version .sharenix.json .vimrc .vscode/settings.json'
+
+if [ "${SHELL%zsh}" != "$SHELL" ]; then
+	COPYING_DIRS="$COPYING_DIRS .oh-my-zsh"
+	COPYING_FILES="$COPYING_FILES .zshrc"
+elif [ "${SHELL%bash}" != "$SHELL" ]; then
+	COPYING_DIRS="$COPYING_DIRS .aliases"
+	COPYING_FILES="$COPYING_FILES .bashrc .config/git/.gitconfig"
+fi
+
+# kde konsole colorsheme bug
+if [ ! -z "$KONSOLE_PROFILE_NAME" ]; then
+	COPYING_FILES="$COPYING_FILES .local/share/konsole/base16-default-dark.colorscheme"
+else
+	COPYING_FILES="$COPYING_FILES .config/base16-shell"
+fi
