@@ -1,10 +1,10 @@
 #!/bin/sh
 
-die() { 
-	echo $@ && exit 1 
+die() {
+	echo $@ && exit 1
 }
 
-[ -z "$DW_DOTFILES_VERSION" ] || die "already installed"
+[ -z "$DOT_VERSION" ] || die "already installed"
 
 BACKUP_DIR=
 create_backup_dir() {
@@ -93,3 +93,12 @@ link_files $COPYING_FILES
 unset BACKUP_DIR
 unset COPYING_DIRS
 unset COPYING_FILES
+
+# configure default xdg links
+if [ ! -z $(which xdg-user-dir) ]; then
+	ln -s "$(xdg-user-dir DOWNLOAD)" $HOME/.downloads
+	ln -s "$(xdg-user-dir PICTURES)" $HOME/.images
+	ln -s "$(xdg-user-dir DESKTOP)" $HOME/.desktop
+fi
+
+echo "installed"
