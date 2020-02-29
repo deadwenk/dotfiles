@@ -1,7 +1,7 @@
 #!/bin/sh
 
 COPYING_DIRS='.bin .vim'
-COPYING_FILES='.dot_version .sharenix.json .vimrc .vscode/settings.json'
+COPYING_FILES='.dot_version .sharenix.json .vimrc'
 
 if [ "${SHELL%zsh}" != "$SHELL" ]; then
 	COPYING_DIRS="$COPYING_DIRS .oh-my-zsh"
@@ -9,6 +9,14 @@ if [ "${SHELL%zsh}" != "$SHELL" ]; then
 elif [ "${SHELL%bash}" != "$SHELL" ]; then
 	COPYING_DIRS="$COPYING_DIRS .aliases"
 	COPYING_FILES="$COPYING_FILES .bashrc .config/git/.gitconfig"
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	COPYING_FILES="$COPYING_FILES Library/Application\ Support/Code/User/settings.json"
+elif [[ "$OSTYPE" == "msys" ]]; then
+	# COPYING_FILES="$COPYING_FILES ~/Code/User/settings.json"
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+	COPYING_FILES="$COPYING_FILES .config/Code/User/settings.json"
 fi
 
 # kde konsole colorsheme bug

@@ -16,7 +16,7 @@
 	"editor.wordWrapColumn": 120,
 	"editor.wordWrap": "wordWrapColumn",
 	"editor.wrappingIndent": "indent",
-	// "editor.autoClosingBrackets": "never",
+	"editor.autoClosingBrackets": "languageDefined",
 	"editor.fontLigatures": true,
 	"editor.fontFamily": "'Iosevka SS08', Menlo, Monaco, 'Courier New', monospace",
 	"editor.mouseWheelZoom": false,
@@ -33,5 +33,5 @@
 	"git.autoRepositoryDetection": false,
 	
 	"telemetry.enableCrashReporter": false,
-	"telemetry.enableTelemetry": false,
+	"telemetry.enableTelemetry": false
 }
