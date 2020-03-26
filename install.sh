@@ -95,7 +95,7 @@ unset COPYING_DIRS
 unset COPYING_FILES
 
 # configure default xdg links
-if [ ! -z $(which xdg-user-dir) ]; then
+if [ ! -z $(which xdg-user-dir 2>/dev/null) ]; then
 	ln -s "$(xdg-user-dir DOWNLOAD)" $HOME/.downloads
 	ln -s "$(xdg-user-dir PICTURES)" $HOME/.images
 	ln -s "$(xdg-user-dir DESKTOP)" $HOME/.desktop

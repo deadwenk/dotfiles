@@ -14,7 +14,7 @@ fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	COPYING_FILES="$COPYING_FILES Library/Application\ Support/Code/User/settings.json"
 elif [[ "$OSTYPE" == "msys" ]]; then
-	# COPYING_FILES="$COPYING_FILES ~/Code/User/settings.json"
+	COPYING_FILES="$COPYING_FILES $(cygpath -u $APPDATA)/Code/User/settings.json"
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 	COPYING_FILES="$COPYING_FILES .config/Code/User/settings.json"
 fi
